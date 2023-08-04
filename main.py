@@ -95,6 +95,12 @@ async def koala(ctx):
     koala_js = requests.get(url).json()
     await ctx.send(koala_js['image'])
 
+@bot.command(name='raccoon')
+async def koala(ctx):
+    url = 'https://some-random-api.com/animal/raccoon'
+    raccoon_js = requests.get(url).json()
+    await ctx.send(raccoon_js['image'])
+
 
 if __name__ == '__main__':
     load_dotenv()
