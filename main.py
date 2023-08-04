@@ -20,6 +20,7 @@ def get_value(nested_dicts: dict, key: hash) -> hash:
             if value is not None:
                 return value
 
+
 @bot.command(name='need_help')
 async def need_help(ctx):
     TEXT = '''
@@ -36,6 +37,7 @@ $cats <n> — где n — число от 1 до 10, количество из�
 $dogs <n> — где n — число от 1 до 10, количество изображений собак
     '''
     await ctx.send(TEXT)
+
 
 @bot.command(name='cat')
 async def cat(ctx):
@@ -85,6 +87,13 @@ async def capybara(ctx):
     url = 'https://api.capy.lol/v1/capybara?json=true'
     capibara_js = requests.get(url).json()
     await ctx.send(capibara_js['data']['url'])
+
+
+@bot.command(name='koala')
+async def koala(ctx):
+    url = 'https://some-random-api.com/animal/koala'
+    koala_js = requests.get(url).json()
+    await ctx.send(koala_js['fact'], koala_js['image'])
 
 
 if __name__ == '__main__':
