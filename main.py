@@ -93,7 +93,7 @@ async def capybara(ctx):
 async def koala(ctx):
     url = 'https://some-random-api.com/animal/koala'
     koala_js = requests.get(url).json()
-    await ctx.send(koala_js['fact'], koala_js['image'])
+    await ctx.send(koala_js['image'])
 
 
 if __name__ == '__main__':
