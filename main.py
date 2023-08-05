@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
-
+bot.remove_command('help')
 
 def get_value(nested_dicts: dict, key: hash) -> hash:
     if key in nested_dicts and 'official-artwork' in nested_dicts[key]:
@@ -21,22 +21,25 @@ def get_value(nested_dicts: dict, key: hash) -> hash:
                 return value
 
 
-@bot.command(name='need_help')
-async def need_help(ctx):
+@bot.command(name='help')
+async def help(ctx):
     TEXT = '''
 Небольшая справка по командам бота:
 
 $cat — случайное изображение котика
 $capybara — случайное изображение капибары
 $dog — случайное изображение собаки
+$koala — случайное изображение коалы
 $pokemon — случайное изображение покемона
+$raccoon — случайное изображение енота
 
 Так же есть возможность получить сразу несколько изображений некоторых животных:
 
 $cats <n> — где n — число от 1 до 10, количество изображений кошек
 $dogs <n> — где n — число от 1 до 10, количество изображений собак
     '''
-    await ctx.send(TEXT)
+    embed = discord.Embed(title='Справка по командам бота', description=TEXT)
+    await ctx.send(embed=embed)
 
 
 @bot.command(name='cat')
@@ -50,8 +53,8 @@ async def cat(ctx):
 async def cats(ctx, n=None):
     url = 'https://api.thecatapi.com/v1/images/search?limit=10'
     cats_list = requests.get(url).json()
-    if n is None or int(n) > 10:
-        n = 10
+    if n is None or int(n) > 3:
+        n = 3
     for i in range(int(n)):
         await ctx.send(cats_list[i]['url'])
 
@@ -66,8 +69,8 @@ async def dog(ctx):
 @bot.command(name='dogs')
 async def cats(ctx, n=None):
     url = 'https://dog.ceo/api/breeds/image/random'
-    if n is None or int(n) > 10:
-        n = 10
+    if n is None or int(n) > 3:
+        n = 3
     dogs_list = [requests.get(url).json() for _ in range(int(n))]
     for dog in dogs_list:
         await ctx.send(dog['message'])
