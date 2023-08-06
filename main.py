@@ -6,10 +6,26 @@ import requests
 from discord.ext import commands
 from dotenv import load_dotenv
 
-intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='$', intents=intents)
-bot.remove_command('help')
+
+class AnimalsBot(commands.Bot):
+    def __init__(self):
+        intents = discord.Intents.default()
+        intents.message_content = True
+        super().__init__(command_prefix='$', intents=intents)
+        self.remove_command('help')
+
+    async def on_message(self, message):
+        channel = message.channel
+
+        if message.author != self.user and channel.name != 'команды-для-ботов':
+            embed = discord.Embed(description='😭 Команды боту можно отправлять только в канале "команды-для-ботов"')
+            return await message.channel.send(embed=embed)
+
+        await self.process_commands(message)
+
+
+bot = AnimalsBot()
+
 
 def get_value(nested_dicts: dict, key: hash) -> hash:
     if key in nested_dicts and 'official-artwork' in nested_dicts[key]:
@@ -24,8 +40,6 @@ def get_value(nested_dicts: dict, key: hash) -> hash:
 @bot.command(name='help')
 async def help(ctx):
     TEXT = '''
-Небольшая справка по командам бота:
-
 $cat — случайное изображение котика
 $capybara — случайное изображение капибары
 $dog — случайное изображение собаки
@@ -97,6 +111,7 @@ async def koala(ctx):
     url = 'https://some-random-api.com/animal/koala'
     koala_js = requests.get(url).json()
     await ctx.send(koala_js['image'])
+
 
 @bot.command(name='raccoon')
 async def koala(ctx):
