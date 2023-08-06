@@ -16,8 +16,11 @@ class AnimalsBot(commands.Bot):
 
     async def on_message(self, message):
         channel = message.channel
-
-        if message.author != self.user and channel.name != 'команды-для-ботов':
+        if (
+                message.author != self.user and
+                channel.name != 'команды-для-ботов' and
+                message.content[1:] in self.all_commands
+        ):
             embed = discord.Embed(description='😭 Команды боту можно отправлять только в канале "команды-для-ботов"')
             return await message.channel.send(embed=embed)
 
