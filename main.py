@@ -95,7 +95,7 @@ async def cats(ctx, n=None):
 
 @bot.command(name='pokemon')
 async def pokemon(ctx):
-    identifier = random.randint(1, 500)
+    identifier = random.randint(1, 1008)
     url = f'https://pokeapi.co/api/v2/pokemon/{identifier}'
     content = requests.get(url=url).json()
     pok = get_value(content, 'front_shiny')
