@@ -53,6 +53,7 @@ $koala — случайное изображение коалы
 $panda — случайное изображение панды
 $pokemon — случайное изображение покемона
 $raccoon — случайное изображение енота
+$red_panda — случайное изображение красной панды
 
 Так же есть возможность получить сразу несколько изображений некоторых животных:
 
@@ -154,6 +155,12 @@ async def kangaroo(ctx):
     kangaroo_js = requests.get(url).json()
     await ctx.send(kangaroo_js['image'])
 
+
+@bot.command(name='red_panda')
+async def red_panda(ctx):
+    url = 'https://some-random-api.com/animal/red_panda'
+    red_panda_js = requests.get(url).json()
+    await ctx.send(red_panda_js['image'])
 
 
 if __name__ == '__main__':
