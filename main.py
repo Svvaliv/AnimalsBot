@@ -43,6 +43,7 @@ def get_value(nested_dicts: dict, key: hash) -> hash:
 @bot.command(name='help')
 async def help(ctx):
     TEXT = '''
+$bird — случайное изображение птички
 $cat — случайное изображение котика
 $capybara — случайное изображение капибары
 $dog — случайное изображение собаки
@@ -121,6 +122,13 @@ async def koala(ctx):
     url = 'https://some-random-api.com/animal/raccoon'
     raccoon_js = requests.get(url).json()
     await ctx.send(raccoon_js['image'])
+
+
+@bot.command(name='bird')
+async def bird(ctx):
+    url = 'https://some-random-api.com/animal/bird'
+    bird_js = requests.get(url).json()
+    await ctx.send(bird_js['image'])
 
 
 if __name__ == '__main__':
