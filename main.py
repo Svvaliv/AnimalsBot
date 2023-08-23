@@ -48,6 +48,7 @@ $cat — случайное изображение котика
 $capybara — случайное изображение капибары
 $dog — случайное изображение собаки
 $fox — случайное изображение лисицы
+$kangaroo — случайное изображение кенгуру
 $koala — случайное изображение коалы
 $panda — случайное изображение панды
 $pokemon — случайное изображение покемона
@@ -145,6 +146,13 @@ async def panda(ctx):
     url = 'https://some-random-api.com/animal/fox'
     fox_js = requests.get(url).json()
     await ctx.send(fox_js['image'])
+
+
+@bot.command(name='kangaroo')
+async def kangaroo(ctx):
+    url = 'https://some-random-api.com/animal/kangaroo'
+    kangaroo_js = requests.get(url).json()
+    await ctx.send(kangaroo_js['image'])
 
 
 
