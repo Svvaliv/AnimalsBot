@@ -5,6 +5,7 @@ import discord
 import requests
 from discord.ext import commands
 from dotenv import load_dotenv
+from september_3 import images
 
 
 class AnimalsBot(commands.Bot):
@@ -161,6 +162,11 @@ async def red_panda(ctx):
     url = 'https://some-random-api.com/animal/red_panda'
     red_panda_js = requests.get(url).json()
     await ctx.send(red_panda_js['image'])
+
+@bot.command(name='shufik')
+async def shufik(ctx):
+    img = random.choice(images)
+    await ctx.send(img)
 
 
 if __name__ == '__main__':
