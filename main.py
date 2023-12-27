@@ -54,7 +54,6 @@ $koala — случайное изображение коалы
 $panda — случайное изображение панды
 $pikachu — случайное изображение Пикачу
 $pokemon — случайное изображение покемона
-$raccoon — случайное изображение енота
 $red_panda — случайное изображение красной панды
 
 Так же есть возможность получить сразу несколько изображений некоторых животных:
@@ -91,7 +90,7 @@ async def dog(ctx):
 
 
 @bot.command(name='dogs')
-async def cats(ctx, n=None):
+async def dogs(ctx, n=None):
     url = 'https://dog.ceo/api/breeds/image/random'
     if n is None or int(n) > 3:
         n = 3
@@ -123,11 +122,11 @@ async def koala(ctx):
     await ctx.send(koala_js['image'])
 
 
-@bot.command(name='raccoon')
-async def koala(ctx):
-    url = 'https://some-random-api.com/animal/raccoon'
-    raccoon_js = requests.get(url).json()
-    await ctx.send(raccoon_js['image'])
+# @bot.command(name='raccoon')
+# async def raccoon(ctx):
+#     url = 'https://some-random-api.com/animal/raccoon'
+#     raccoon_js = requests.get(url).json()
+#     await ctx.send(raccoon_js['image'])
 
 
 @bot.command(name='bird')
@@ -145,7 +144,7 @@ async def panda(ctx):
 
 
 @bot.command(name='fox')
-async def panda(ctx):
+async def fox(ctx):
     url = 'https://some-random-api.com/animal/fox'
     fox_js = requests.get(url).json()
     await ctx.send(fox_js['image'])
